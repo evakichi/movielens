@@ -4,17 +4,18 @@ import numpy as np
 import matplotlib.pyplot as pl
 
 if __name__ == '__main__':
-    prog_name,movie_file,rating_file,str_threads = Commonpackage.get_args('\"movie file\"','\"rating file\"','\"num of threads\"')
+    prog_name,movie_file,rating_file,tag_file,str_threads = Commonpackage.get_args('\"movie file\"','\"rating file\"','\"tag file\"','\"num of threads\"')
     threads = int(str_threads)
 
-    mf = pd.read_csv(movie_file)
-    rf = pd.read_csv(rating_file)
+    movie = pd.read_csv(movie_file)
+    rating = pd.read_csv(rating_file)
+    tag = pd.read_csv(tag_file)
 
-    print (rf)
+    print (movie)
+    print (rating)
+    print (tag)
 
-    print (mf)
-
-    for idx,v in mf.iterrows():
+    for idx,v in movie.iterrows():
 #        print (idx)
         v['genres']=[g for g in v['genres'].split('|') ]
 #        print (v['genres'])
@@ -22,12 +23,15 @@ if __name__ == '__main__':
 #    mgrouped = mf.groupby('title').size().sort_values(ascending=False)
 #    print(mgrouped)
 
-    rgroupedd = rf.groupby('rating').agg({'rating':len})
-    print (rgroupedd)
+#    ratnig_rank = rating.groupby('rating').agg({'rating':'size'})
+#    print (ratig_rank)
 
-#    rgrouped = rf.groupby('rating').size().sort_values(ascending=False)
-#    print(rgrouped)
+#    user_rank = rating.groupby('userId',as_index=False).agg('size').sort_values('size',ascending=False).head(1000)
+#    print (user_rank)
 
-    rgroupedd.plot(kind='bar')
+    movielens = rating.merge(movie,on='movieId').sort_values(['userId','movieId'])
+    print (movielens)
 
-    pl.savefig("/home/evakichi/Pictures/test.png")
+#    rating_rank.plot(kind='bar')
+
+#    pl.savefig("/home/evakichi/Pictures/test.png")
