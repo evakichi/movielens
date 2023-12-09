@@ -8,6 +8,11 @@ from multiprocessing import Process
 import logging
 import hashlib
 from pymongo import MongoClient
+import pandas as pd 
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as pl
 
 #####
 # 共用ルーチンをパッケージしたものです
