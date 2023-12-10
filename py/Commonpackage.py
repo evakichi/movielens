@@ -18,6 +18,8 @@ import matplotlib.pyplot as pl
 # 共用ルーチンをパッケージしたものです
 #####
 
+
+
 def get_hash(core):
     """文字列を小文字化してそれをSHA256でハッシュ化したものです。
     
